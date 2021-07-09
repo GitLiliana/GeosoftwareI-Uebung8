@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Uebung8 - GeosoftwareI</title>
+
+  <!--Include stylesheet:-->
+  <link rel="stylesheet" href="U8_style.css"></link>
+
+  <!--Include vue.js-->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+  <!--Inculde turf:-->
+  <script src='https://unpkg.com/@turf/turf@6.3.0/turf.min.js'></script>
+
+  <!--Include scripts:-->
+  <script defer src="U8_Script.js"></script>
+</head>
+<body>
+
+<h1>
+  Lab 8: User interface for the intersection of a route with a given polygon and calculation of distances</h1>
+<br>
+<p>The following list shows the distances (in km) resulting from the intersection between a given route and a given polygon.
+    The list is sorted in an ascending order.</p>
+
+    <div id="app">
+      {{ routeCutByPolygon(Route, Polygon) }}
+    
+    <br>
+
+    <p>Furthermore the sum of all distances (in km) is given:</p>
+      {{ sumIntersections(Route, Polygon) }}
+    
+
+    <br>
+    <br>
+
+    <p>To calculate the distances resulting from the intersection with the given polygon
+       for any route please enter a route in the following text field.
+       <br><u>Please note:</u> The route must be given as GeoJSON feature collection of type Line String. 
+       (To create a GeoJSON please see: <a href=https://geojson.io/>https://geojson.io/</a>)</p>
+
+    <input v-model="UserInput_GeoJSON">
+    <button v-on:click="calculateUserInput">Calculate</button>
+
+    <br>
+
+    <p>The following list shows the distances (in km) resulting from the intersection
+      between the <u>submitted</u> route and the given polygon. The list is sorted in an ascending order.</p>
+    {{UserInput_ListDistances}}
+    
+    <br>
+    
+    <p>Furthermore the sum of all distances (in km) is given:</p>
+    {{UserInput_SumDistances}}
+    
+    <br>
+
+    <p>The given polygon as GeoJSON is:</p>
+    {{PolygonGeoJSONString}}
+
+    <br>
+
+    </div>
+</body>
